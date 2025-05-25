@@ -1,0 +1,37 @@
+name: My First GitHub Action
+
+# מתי זה ירוץ
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# העבודות שיתבצעו
+jobs:
+  test:
+    name: Test My Code
+    runs-on: ubuntu-latest
+
+    steps:
+    # הורד את הקוד
+    - name: Download my code
+      uses: actions/checkout@v4
+
+    # התקן Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    # התקן תלויות (אם יש)
+    - name: Install packages
+      run: npm install
+
+    # הרץ את הקוד שלי
+    - name: Run my code
+      run: node index.js
+
+    # בדיקה שהכל עובד
+    - name: Check if everything works
+      run: echo "Everything is working great!"
